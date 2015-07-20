@@ -11,4 +11,26 @@ package birth;
  */
 public class backend {
     
+    public boolean login(String user, String password) {
+        return false;
+    }
+    
+    public void enter() {
+        
+    }
+    
+    public void update() {
+        
+    }
+    
+    public void delete() {
+        
+    }
+    
+    
+    protected void finalize() throws Throwable{
+        try {
+            
+        } catch (Throwable t) {}
+    } 
 }

@@ -9,12 +9,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
 
 public class login {
-
+    
+    private static JFrame frame;
+    
     public static void main(String[] args) {
-	JFrame frame = new JFrame("Login");
+	frame = new JFrame("Login");
 	frame.setSize(300, 140);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -54,11 +57,24 @@ public class login {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                
                 String user;
                 char[] password;
+                boolean check;                
+                
                 user = userText.getText();
                 password = passwordText.getPassword();
+                backend Bend = new backend();
+                check = Bend.login(user, password.toString());
                 
+                if (check) 
+                    System.out.print(3);
+                    //gui Gui = new gui();
+                else {
+                    userText.setText("");
+                    passwordText.setText("");
+                    JOptionPane.showMessageDialog(null, "Incorrect login information");                    
+                }
             }
         });
 				
