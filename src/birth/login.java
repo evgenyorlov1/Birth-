@@ -60,16 +60,20 @@ public class login {
                 
                 String user;
                 char[] password;
-                boolean check;                
+                boolean check;
+                gui Gui;
                 
                 user = userText.getText();
-                password = passwordText.getPassword();
+                password = passwordText.getPassword();                
                 backend Bend = new backend();
-                check = Bend.login(user, password.toString());
-                
-                if (check) 
-                    System.out.print(3);
-                    //gui Gui = new gui();
+                check = Bend.login(user, password);
+                                
+                if (check) {
+                    Gui = new gui();  
+                    Gui.main();                    
+                    frame.setVisible(false);
+                    frame.dispose();
+                }
                 else {
                     userText.setText("");
                     passwordText.setText("");
