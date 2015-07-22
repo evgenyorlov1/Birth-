@@ -8,6 +8,7 @@ package birth;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -19,13 +20,13 @@ public class gui extends javax.swing.JFrame {
     backend Bend = new backend();
     List<List<Object>> rowData = new ArrayList<List<Object>>();    
     Object[][] Data;
-    
+    MyTableModel tModel;
+            
     /**
      * Creates new form gui
      */
     public gui() {      
-        setVisible(true);
-        System.out.println("+");
+        setVisible(true);        
         initComponents();          
     }        
     
@@ -80,10 +81,7 @@ public class gui extends javax.swing.JFrame {
                 String.valueOf(Data[i][2]), String.valueOf(Data[i][3])));
     }
 
-    System.out.println(entities.get(1).date);
-    MyTableModel tModel = new MyTableModel(entities);
-    System.out.println("tag: " + tModel.getValueAt(1, 2));
-    System.out.println("date: " + tModel.getValueAt(1, 3));
+    tModel = new MyTableModel(entities);
     jTable4.setModel(tModel);
     jScrollPane1.setViewportView(jTable4);
 
@@ -287,20 +285,29 @@ public class gui extends javax.swing.JFrame {
         String tag1;
         String tag2;
         int tag3;
-        Calendar data;
+        Calendar date;
         
         try {
             
             tag1 = jTextField1.getText();
             tag2 = jTextField2.getText();
             tag3 = Integer.valueOf(jTextField3.getText());                        
-            data = dateChooserCombo1.getSelectedDate();
+            date = dateChooserCombo1.getSelectedDate();
+            
+            int year = Calendar.getInstance().get(date.YEAR);
+            int month = Calendar.getInstance().get(date.MONTH);
+            int day = Calendar.getInstance().get(date.DATE);
+            
+            String data = year + "-" + month + "-" + day;                   
         
-            Bend.insert(tag1, tag2, tag3, data);
+            Bend.insert(tag1, tag2, tag3, date);
         
             jTextField1.setText("");
             jTextField2.setText("");
             jTextField3.setText("");                
+            
+            tModel.addRow(new entity(tag1, tag2, String.valueOf(tag3), String.valueOf(data)));
+            SwingUtilities.updateComponentTreeUI(jPanel1);
         
         } catch(Exception e) {}                
         

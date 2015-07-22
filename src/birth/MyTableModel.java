@@ -66,4 +66,12 @@ public class MyTableModel extends AbstractTableModel{
         }
         return result;        
     }        
+    
+    public void addRow(entity ent) {
+        entities.add(ent);
+    }
+    
+    public void deleteRow(entity ent) {
+        entities.remove(ent);
+    }
 }
