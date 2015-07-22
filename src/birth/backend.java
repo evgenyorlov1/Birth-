@@ -17,7 +17,7 @@ import java.util.List;
 
 public class backend {
     
-    private static List<List<String>> rowData = new ArrayList<List<String>>();    
+    private static List<List<Object>> rowData = new ArrayList<List<Object>>();    
     public static Connection conn = null;
     public static Statement stmt = null;
     private static String driver = "com.mysql.jdbc.Driver";
@@ -77,35 +77,27 @@ public class backend {
         } catch(Exception e) {}
     }
     
-    public void select() {
+    public List<List<Object>> select() {
         
         rowData.clear();
         ResultSet result;
-        //String select = "select * from db.info;";
-        String select = "select datas from db.info;";
+        String select = "select * from db.info;";      
         
         try {            
             result = stmt.executeQuery(select);            
             
             while(result.next()) {
-                List<String> row = new ArrayList<String>();
-                
-//                row.add(result.getString("tag1"));
-//                System.out.println(result.getString("tag1"));
-//                row.add(result.getString("tag2"));
-//                System.out.println(result.getString("tag2"));
-//                row.add(result.getString("tag3"));
-//                System.out.println(result.getString("tag3"));
-                //System.out.println(result.getDate("datas"));
-                //Date a = result.getDate(url);
-                //System.out.println(a);
-                //System.out.println("+");
+                List<Object> row = new ArrayList<Object>();                
+                row.add(result.getString("tag1"));                
+                row.add(result.getString("tag2"));
+                row.add(result.getString("tag3"));                
+                row.add((result.getDate("datas")).toString());                
                 rowData.add(row);
             }
                                     
-        } catch(Exception e) {}
-                
+        } catch(Exception e) {}                
         
+        return rowData;
     }
     
     public void disconnect() {

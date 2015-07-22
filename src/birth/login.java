@@ -69,8 +69,7 @@ public class login {
                 check = Bend.login(user, password);
                                 
                 if (check) {
-                    Gui = new gui();  
-                    Gui.main();                    
+                    Gui = new gui();                      
                     frame.setVisible(false);
                     frame.dispose();
                 }
