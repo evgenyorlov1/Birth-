@@ -59,21 +59,30 @@ public class backend {
         
     }
     
-    public void update() {   
+    //update has a bug: because table has no id column, all identical records will be updated at the same time
+    //at the same time, in table view only one of many identical rows is affected, because model does not reloads. After .select() 
+    //all identical rows are updated.
+    //table need to be fixed and id column added    
+    public void update(String tag1, String tag2, String tag3, String datas, String value, String column) {   
         
-        String update = "update db.info set";
-        
+        String update = "update db.info set " + column + " = " + "'" + value + "'" + " where tag1 = " 
+                + "'" + tag1 + "'" + " and tag2 = " + "'" 
+                + tag2 + "'" + " and tag3 = " + "'" + tag3 + "'" + " and datas = " + "'" + datas + "'" +";";                
         try {
             stmt.executeUpdate(update);
         } catch(Exception e) {}
     }
     
-    public void delete() {
+    public void delete(String tag1, String tag2, String tag3, String datas) {
         
-        String delete = "delete from db.info where = ";
-        
+        String delete = "delete from db.info where tag1 = " + "'" + tag1 + "'" + " and tag2 = " 
+                + "'" + tag2 + "'" + " and tag3 = " + "'" + tag3 + "'" + " and datas = " 
+                + "'" + datas + "'" + ";";        
+        //System.out.println(delete);
         try {
+          //  System.out.println("here1");
             stmt.executeUpdate(delete);
+            //System.out.println("here2");
         } catch(Exception e) {}
     }
     

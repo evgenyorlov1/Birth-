@@ -74,4 +74,5 @@ public class MyTableModel extends AbstractTableModel{
     public void deleteRow(entity ent) {
         entities.remove(ent);
     }
+      
 }
